@@ -19,10 +19,11 @@ class DatabaseSeeder extends Seeder
          User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@material.com',
+            'role' => ADMIN_ROLE,
             'password' => ('secret')
         ]);
-
-         $this->call([
+        $this->call([
+             UserSeeder::class,
              DriverSeeder::class,
              carSeeder::class,
              bankAccountSeeder::class,

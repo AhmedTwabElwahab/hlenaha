@@ -28,7 +28,7 @@ class DriverFactory extends Factory
 			'postal_code'       => $this->faker->randomNumber(5),
 			'status'            => $this->faker->boolean(),
 			'balance'           => $this->faker->randomNumber(4),
-			'user_id'           => 1,
+			'user_id'           => $this->faker->numberBetween(3,9),
         ];
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Requests\Api\DriverRequest;
+use App\Http\Requests\web\DriverRequest;
 use App\Models\driver;
-use Carbon\Carbon;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -35,21 +35,25 @@ class DriverController extends BaseController
     /**
      * Store a new Driver in dataBase.
      * @param DriverRequest $request
-     * @return JsonResponse
+     * @return
      */
-    public function store(DriverRequest $request): JsonResponse
+    public function store(DriverRequest $request)
     {
         DB::beginTransaction();
         try
         {
-            $driver = Driver::createDriver($request);
-            DB::commit();
-            return $this->sendResponse($driver,'success_add');
+            $user = User::CreateUser($request);
+            if ($user)
+            {
+                Driver::createDriver($request,$user->id);
+                DB::commit();
+            }
+            return redirect()->route('driver.index')->withStatus(__('global.create_success'));
         } catch (Exception $e)
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors([$message]);
         }
     }
 
@@ -64,57 +68,53 @@ class DriverController extends BaseController
     }
 
     /**
-     * Display information for a specific Driver.
-     * @param Driver $driver
-     * @return JsonResponse
-     */
-    public function show(driver $driver): JsonResponse
-    {
-        return $this->sendResponse($driver, 'Driver info');
-    }
-
-    /**
      * Update the Driver information.
      * @param DriverRequest $request
      * @param Driver $driver
-     * @return JsonResponse
+     * @return
      */
-    public function update(DriverRequest $request, driver $driver): JsonResponse
+    public function update(DriverRequest $request, driver $driver)
     {
         DB::beginTransaction();
         try
         {
-            $Driver = $driver->updateDriver($request,$driver->id);
+            $Driver = driver::updateDriver($request,$driver->id);
             DB::commit();
-            return $this->sendResponse($Driver,'update_success');
+            return back()->withStatus(__('global.update_success'));
         } catch (Exception $e)
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors([$message]);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      * @param Driver $driver
-     * @return JsonResponse
+     * @return
      */
-    public function destroy(driver $driver): JsonResponse
+    public function destroy(driver $driver)
     {
         DB::beginTransaction();
-        try {
+        try
+        {
+            if (!$driver->user->delete())
+            {
+                throw new Exception('delete_user_error');
+            }
             if (!$driver->delete())
             {
                 throw new Exception('delete_error');
             }
+
             DB::commit();
-            return $this->success('success_delete');
+            return redirect()->route('driver.index')->withStatus(__('global.delete_success'));
         } catch (Exception $e)
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors([$message]);
         }
     }
 }

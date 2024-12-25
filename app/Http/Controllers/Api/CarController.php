@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CarRequest;
+use App\Http\Requests\web\CarRequest;
 use App\Models\Car;
 use Exception;
 use Illuminate\Http\JsonResponse;

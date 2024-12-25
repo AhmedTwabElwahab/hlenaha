@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\TransactionRequest;
+use App\Http\Requests\web\TransactionRequest;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Exception;

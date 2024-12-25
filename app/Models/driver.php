@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Http\Requests\Api\DriverRequest;
+use App\Http\Requests\web\DriverRequest;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Driver
@@ -39,9 +39,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class driver extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
-    use HasFactory;
     protected $dateFormat = 'Y:m:d H:i:s';
     protected $fillable = [
         'id',
@@ -53,25 +52,29 @@ class driver extends Model
         'user_id',
     ];
 
+    protected $data = [
+        'deleted_at'
+    ];
+
     /**
      * @throws Exception
      */
-    public static function createDriver(DriverRequest $request): Driver
+    public static function createDriver(DriverRequest $request,$user_id): Driver
     {
         $Driver = new self();
 
         $Driver->name               = $request->input('name');
         $Driver->id_number          = $request->input('id_number');
         $Driver->phone              = $request->input('phone');
-        $Driver->country            = $request->input('country');
-        $Driver->city               = $request->input('city');
-        $Driver->district           = $request->input('district');
-        $Driver->street             = $request->input('street');
-        $Driver->building_number    = $request->input('building_number');
-        $Driver->postal_code        = $request->input('postal_code');
-        $Driver->balance            = $request->input('balance');
-        $Driver->user_id            = $request->input('user_id');
-        $Driver->status             = $request->input('status');
+        $Driver->country            = $request->input('country')?? null;
+        $Driver->city               = $request->input('city')?? null;
+        $Driver->district           = $request->input('district')?? null;
+        $Driver->street             = $request->input('street')?? null;
+        $Driver->building_number    = $request->input('building_number')?? null;
+        $Driver->postal_code        = $request->input('postal_code')?? null;
+        $Driver->balance            = $request->input('balance') ?? 0;
+        $Driver->user_id            = $request->input('user_id') ?? $user_id;
+        $Driver->status             = $request->input('status') ?? 0;
 
         if($request->file('image'))
         {
@@ -98,22 +101,22 @@ class driver extends Model
     /**
      * @throws Exception
      */
-    private function updateDriver(DriverRequest $request, int $driver): Driver
+    public static function updateDriver(DriverRequest $request, int $driver): Driver
     {
         $Driver = Driver::where('id', $driver)->first();
+        $Driver->name               = $request->input('name') ?? $Driver->name;
+        $Driver->id_number          = $request->input('id_number') ?? $Driver->id_number;
+        $Driver->phone              = $request->input('phone') ?? $Driver->phone;
+        $Driver->country            = $request->input('country') ?? $Driver->country;
+        $Driver->city               = $request->input('city') ?? $Driver->city;
+        $Driver->district           = $request->input('district') ?? $Driver->district;
+        $Driver->street             = $request->input('street') ?? $Driver->street;
+        $Driver->building_number    = $request->input('building_number') ?? $Driver->building_number;
+        $Driver->postal_code        = $request->input('postal_code') ?? $Driver->postal_code;
+        $Driver->balance            = $request->input('balance') ?? $Driver->balance;
+        $Driver->user_id            = $request->input('user_id') ?? $Driver->user_id;
+        $Driver->status             = $request->input('status') == null ? 0 : 1;
 
-        $Driver->name               = $request->input('name');
-        $Driver->id_number          = $request->input('id_number');
-        $Driver->phone              = $request->input('phone');
-        $Driver->country            = $request->input('country');
-        $Driver->city               = $request->input('city');
-        $Driver->district           = $request->input('district');
-        $Driver->street             = $request->input('street');
-        $Driver->building_number    = $request->input('building_number');
-        $Driver->postal_code        = $request->input('postal_code');
-        $Driver->balance            = $request->input('balance');
-        $Driver->user_id            = $request->input('user_id');
-        $Driver->status             = $request->input('status');
 
         if($request->file('image'))
         {

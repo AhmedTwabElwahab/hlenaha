@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Requests\Api\TransactionRequest;
+use App\Http\Requests\web\TransactionRequest;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Requests\Api\CarRequest;
+use App\Http\Requests\web\CarRequest;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -10,7 +10,7 @@ const APP_PAGINATE                   = 5;
 const APP_ERROR                      = -1;
 const ADMIN_ROLE                     = "ADMIN_ROLE";
 const USER_ROLE                     = "ROLE_USER";
-const DRIVER_IMAGES_FOLDER           = 'images' . DS . 'clients' . DS;
+const DRIVER_IMAGES_FOLDER           = 'images' . DS . 'drivers' ;
 
 /**
  * End APP Settings

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\BankAccountRequest;
+use App\Http\Requests\web\BankAccountRequest;
 use App\Models\bankAccount;
 use Carbon\Carbon;
 use Exception;

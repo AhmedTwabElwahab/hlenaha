@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Http\Requests\web\UserRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
 
@@ -16,12 +19,12 @@ use Illuminate\Contracts\Auth\CanResetPassword;
  *
  * @property integer $id
  * @property string  $name
- * @property string  $title
- * @property string  $slug
+ * @property string  $phone
+ * @property string  $about
  * @property string  $email
- * @property string  $user_name
  * @property string  $password
  * @property string  $role
+ * @property integer  $balance
  *
  * RELATIONS PROPERTIES
  *
@@ -31,7 +34,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, softDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -68,10 +71,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function CreateUser(string $name,string $email,string $password,bool $active)
+
+    public static function CreateUser($request): User
     {
+        $user = new User();
+        $user->name             = $request->input('name');
+        $user->phone            = $request->input('phone');
+        $user->about            = $request->input('about') ?? null;
+        $user->email            = $request->input('email');
+        $user->password         = Hash::make($request->input('password'));
+        $user->role             = $request->input('role') ?? USER_ROLE;
 
-
+        if (!$user->save())
+        {
+            throw new \Exception("Failed to create user");
+        }
+        return $user;
     }
 
     public function isAdmin()
