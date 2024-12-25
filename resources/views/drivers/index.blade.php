@@ -29,12 +29,14 @@
                         <div class="card-body px-0 pb-2">
                             <div class="row gx-4 mb-2">
                                 <div class="col-6">
-                                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                                        <div class="input-group input-group-outline">
-                                            <label class="form-label"> بحث....... </label>
-                                            <input type="text" name="search" class="form-control">
+                                    <form method="get" action="{{route('driver.index')}}">
+                                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                                            <div class="input-group input-group-outline">
+                                                <label class="form-label"> بحث....... </label>
+                                                <input type="text" name="search" class="form-control">
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                                 <div class="col-6 text-start" style="margin-right: -18px">
                                     <a class="btn bg-gradient-dark mb-0" href="{{route('driver.create')}}">
@@ -78,9 +80,15 @@
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
                                                         <div>
-                                                            <img src="{{ asset('assets') }}/img/team-2.jpg"
-                                                                 class="avatar avatar-sm ms-3 border-radius-lg"
-                                                                 alt="user1">
+                                                            @if($driver->image)
+                                                                <img src="{{ asset($driver->image) }}"
+                                                                     class="avatar avatar-sm ms-3 border-radius-lg"
+                                                                     alt="user1">
+                                                            @else
+                                                                <img src="{{ asset(DEFUlAT_USER_IMAGE) }}"
+                                                                     class="avatar avatar-sm ms-3 border-radius-lg"
+                                                                     alt="user1">
+                                                            @endif
                                                         </div>
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm">{{$driver->name}}</h6>

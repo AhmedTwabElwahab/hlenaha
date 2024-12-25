@@ -2,7 +2,7 @@
     <x-navbars.sidebar activePage="drivers"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage=" {{__('drivers/index.drivers')}}"></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage=" {{__('drivers/index.edit_driver')}}" parent="{{__('drivers/index.drivers')}}"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid px-2 px-md-4">
             <div class="page-header min-height-300 border-radius-xl mt-4"  style="background-image: linear-gradient(to left bottom, #002f6c, #00528f, #007392, #008f75, #28a745);">
@@ -43,13 +43,6 @@
                     </div>
                 </div>
                 <div class="card card-plain h-100">
-                    <div class="card-header pb-0 p-3">
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">{{__('drivers/edit.driver_info')}}</h6>
-                            </div>
-                        </div>
-                    </div>
                     <div class="card-body p-3">
                         @if (session('status'))
                             <div class="row">

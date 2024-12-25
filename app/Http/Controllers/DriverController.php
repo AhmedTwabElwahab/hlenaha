@@ -7,7 +7,7 @@ use App\Http\Requests\web\DriverRequest;
 use App\Models\driver;
 use App\Models\User;
 use Exception;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -17,9 +17,25 @@ class DriverController extends BaseController
      * Display all Drivers.
      * @return View
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $drivers = Driver::paginate(APP_PAGINATE);
+        if ($request->has('search'))
+        {
+            $search = $request->get('search');
+            $drivers = Driver::Join('users', 'drivers.user_id', '=', 'users.id')
+                ->select('drivers.*', 'users.email')
+                ->where('drivers.name','LIKE','%'.$search.'%')
+                ->orWhere('drivers.phone','LIKE','%'.$search.'%')
+                ->orWhere('users.email','LIKE','%'.$search.'%')
+                ->orWhere('id_number','LIKE','%'.$search.'%')
+                ->orWhere('country','LIKE','%'.$search.'%')
+                ->orWhere('city','LIKE','%'.$search.'%')
+                ->orWhere('district','LIKE','%'.$search.'%')
+                ->paginate(20);
+        }else
+        {
+            $drivers = Driver::paginate(APP_PAGINATE);
+        }
         return view('drivers.index', compact('drivers'));
     }
 
