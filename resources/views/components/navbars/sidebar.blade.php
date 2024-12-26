@@ -31,11 +31,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'cars' ? 'active bg-gradient-primary' : '' }}"  href="{{ route('tables') }}">
+                <a class="nav-link {{ $activePage == 'cars' ? 'active bg-gradient-primary' : '' }}"  href="{{ route('cars.index') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">directions_car</i>
                     </div>
                     <span class="nav-link-text me-1">{{__('global.cars')}}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $activePage == 'Trips' ? 'active bg-gradient-primary' : '' }}"  href="{{ route('trips.index') }}">
+                    <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons-round opacity-10">mode_of_travel</i>
+                    </div>
+                    <span class="nav-link-text me-1">{{__('global.Trips')}}</span>
                 </a>
             </li>
             <li class="nav-item">

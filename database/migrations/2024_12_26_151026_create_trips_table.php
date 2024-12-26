@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('car_registries', function (Blueprint $table) {
+        Schema::create('trips', function (Blueprint $table)
+        {
             $table->id();
             $table->foreignId('driver_id');
             $table->foreignId('car_id');
-            $table->string('type');
+            $table->boolean('status')->default(true);
             $table->date('date_start'); // تاريخ الاستلام
-            $table->decimal('kilo_start'); //عدد الكيلوات الحالية
+            $table->decimal('kilo_start',10,2); //عدد الكيلوات الحالية
             $table->date('date_end')->nullable(); // تاريخ التسليم
-            $table->decimal('kilo_end')->nullable(); // عدد الكيلوات المستلمه
+            $table->decimal('kilo_end',10,2)->nullable(); // عدد الكيلوات المستلمه
 
             $table->timestamps();
             $table->foreign('driver_id')->references('id')->on('drivers');
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('car_registries');
+        Schema::dropIfExists('trips');
     }
 };

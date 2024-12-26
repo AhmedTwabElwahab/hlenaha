@@ -8,6 +8,8 @@ return [
     'cars'                   => 'السيارات',
     'notifications'          => 'إشعارات',
     'personalInfo'           => 'حسابي',
+    'bank_account'           => 'الحسابات البنكية',
+    'Trips'                  => 'الرحلات',
 
 
 

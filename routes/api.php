@@ -33,17 +33,12 @@ Route::group(['middleware' => ['auth:sanctum', CheckAdmin::class]],function (){
     Route::delete('/users/{User}',[UserController::class,'destroy']);
 
     //Driver
-    Route::get('/driver',[DriverController::class,'index']);
-    Route::post('/driver',[DriverController::class,'store']);
     Route::put('/driver/{driver}',[DriverController::class,'update']);
     Route::get('/driver/{driver}',[DriverController::class,'show']);
-    Route::delete('/driver/{driver}',[DriverController::class,'destroy']);
 
     //bankAccount
-    Route::get('/bank_account',[BankAccountController::class,'index']);
     Route::post('/bank_account',[BankAccountController::class,'store']);
     Route::put('/bank_account/{bankAccount}',[BankAccountController::class,'update']);
-    Route::get('/bank_account/{bankAccount}',[BankAccountController::class,'show']);
     Route::delete('/bank_account/{bankAccount}',[BankAccountController::class,'destroy']);
 
     //Transaction

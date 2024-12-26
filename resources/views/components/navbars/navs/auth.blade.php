@@ -11,7 +11,7 @@
                 </li>
                 @isset($parent)
                     <li class="breadcrumb-item text-sm ps-2">
-                        <a class="opacity-5 text-dark" href="{{redirect()->back()}}">{{$parent}}</a>
+                        <a class="opacity-5 text-dark" href="{{ url()->previous()}}">{{$parent}}</a>
                     </li>
                 @endisset
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ $titlePage }}</li>

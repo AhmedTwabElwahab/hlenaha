@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\web\DriverRequest;
+use App\Models\bankAccount;
 use App\Models\driver;
 use App\Models\User;
 use Exception;
@@ -132,5 +133,12 @@ class DriverController extends BaseController
             $message = $this->handleException($e);
             return redirect()->back()->withErrors([$message]);
         }
+    }
+
+
+    public function bank_account(driver $driver): View
+    {
+        $accounts = bankAccount::where('user_id',$driver->user_id)->paginate(APP_PAGINATE);
+        return view('drivers.bank_account', compact('driver','accounts'));
     }
 }

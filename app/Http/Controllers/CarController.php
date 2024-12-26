@@ -1,32 +1,57 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
+use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\web\CarRequest;
 use App\Models\Car;
 use Exception;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class CarController extends BaseController
 {
     /**
      * Display main page.
-     * @return JsonResponse
+     * @return View
      */
-    public function index(): JsonResponse
+    public function index(Request $request): View
     {
-        $cars = Car::all();
-        return $this->sendResponse($cars, 'All cars have arrived.');
+        if ($request->has('search'))
+        {
+            $search = $request->get('search');
+            $cars = Car::where('type','LIKE','%'.$search.'%')
+                ->orWhere('model','LIKE','%'.$search.'%')
+                ->orWhere('year','LIKE','%'.$search.'%')
+                ->orWhere('color','LIKE','%'.$search.'%')
+                ->orWhere('brand','LIKE','%'.$search.'%')
+                ->orWhere('insurance_expiry','LIKE','%'.$search.'%')
+                ->orWhere('price_day','LIKE','%'.$search.'%')
+                ->paginate(20);
+        }else
+        {
+            $cars = Car::paginate(APP_PAGINATE);
+        }
+        return view('cars.index', compact('cars'));
+    }
+
+    /**
+     * Display create paage.
+     * @return View
+     */
+    public function create():View
+    {
+        return view('cars.create');
     }
 
     /**
      * Store a new Car in dataBase.
      * @param CarRequest $request
-     * @return JsonResponse
+     * @return View
      * @throws \Exception
      */
-    public function store(CarRequest $request): JsonResponse
+    public function store(CarRequest $request)
     {
         DB::beginTransaction();
         try
@@ -34,33 +59,32 @@ class CarController extends BaseController
             $car = Car::createCar($request);
 
             DB::commit();
-            $this->success('success_add');
-            return $this->sendResponse($car,'success_add');
+            return redirect()->route('cars.index')->withStatus(__('global.create_success'));
         } catch (Exception $e)
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors([$message]);
         }
     }
 
     /**
      * Display information for a specific customer.
      * @param Car $car
-     * @return JsonResponse
+     * @return View
      */
-    public function show(Car $car): JsonResponse
+    public function edit(Car $car):View
     {
-        return $this->sendResponse($car, 'car info');
+        return view('cars.edit', compact('car'));
     }
 
     /**
      * Update the Car information.
      * @param CarRequest $request
      * @param Car $car
-     * @return JsonResponse
+     * @return
      */
-    public function update(CarRequest $request, Car $car): JsonResponse
+    public function update(CarRequest $request, Car $car)
     {
         DB::beginTransaction();
         try
@@ -70,12 +94,12 @@ class CarController extends BaseController
             $car->model             = $request->input('model');
             $car->year              = $request->input('year');
             $car->color             = $request->input('color');
-            $car->price_day         = $request->input('price_day');
+            $car->price_day         = $request->input('price_day') ?? $car->price_day;
             $car->kilo              = $request->input('kilo');
             $car->insurance         = $request->input('insurance');
             $car->insurance_expiry  = $request->input('insurance_expiry');
             $car->description       = $request->input('description');
-            $car->status            = $request->input('status');
+            $car->status            = $request->input('status') == null ? 0 : 1;
 
 
             if (!$car->update())
@@ -83,21 +107,21 @@ class CarController extends BaseController
                 throw new Exception('update_error',APP_ERROR);
             }
             DB::commit();
-            return $this->sendResponse($car,'update success');
+            return back()->withStatus(__('global.update_success'));
         } catch (Exception $e)
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors([$message]);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      * @param Car $car
-     * @return JsonResponse
+     * @return View
      */
-    public function destroy(Car $car): JsonResponse
+    public function destroy(Car $car):View
     {
         DB::beginTransaction();
         try {
@@ -106,12 +130,12 @@ class CarController extends BaseController
                 throw new Exception('delete_error',APP_ERROR);
             }
             DB::commit();
-            return $this->success('delete success');
+            return redirect()->route('cars.index')->withStatus(__('global.delete_success'));
         } catch (Exception $e)
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors([$message]);
         }
     }
 }

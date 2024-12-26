@@ -9,7 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class CarRequest extends FormRequest
 {
     protected array $rules = [
-        'id'                    => 'required|numeric',
         'type'                  => 'sometimes|nullable|string',
         'brand'                 => 'sometimes|nullable|string',
         'model'                 => 'sometimes|nullable|string',

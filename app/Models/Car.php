@@ -6,6 +6,7 @@ use App\Http\Requests\web\CarRequest;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 /**
@@ -30,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Car extends Model
 {
-    use HasFactory;
+    use HasFactory,softDeletes;
     protected $dateFormat = 'Y:m:d H:i:s';
     protected $fillable = [
         'id',

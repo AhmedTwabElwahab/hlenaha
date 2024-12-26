@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\BankAccountController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\TripController;
+use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -31,7 +35,7 @@ Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')-
 
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function ()
+Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
 {
 	Route::get('tables', function () {
 		return view('pages.tables');
@@ -45,7 +49,11 @@ Route::group(['middleware' => 'auth'], function ()
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
 
-    Route::resource('driver', DriverController::class)->names('driver');
+    Route::resource('driver', DriverController::class)->except('show')->names('driver');
+    Route::resource('cars', CarController::class)->except('show')->names('cars');
 
+    Route::get('/driver/bank_account/{driver}',[DriverController::class, 'bank_account'])->name('bank_account.driver');
+    //Trips
+    Route::resource('trips', TripController::class)->except('show')->names('trips');
 });
 
