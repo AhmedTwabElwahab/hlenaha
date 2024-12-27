@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse px-0 w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'dashboard' ? 'active bg-gradient-primary' : '' }}" href="{{ route('dashboard') }}">
+                <a class="nav-link {{ $activePage == 'dashboard' ? 'active bg-gradient-success' : '' }}" href="{{ route('dashboard') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">dashboard</i>
                     </div>
@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'drivers' ? 'active bg-gradient-primary' : '' }}"  href="{{ route('driver.index') }}">
+                <a class="nav-link {{ $activePage == 'drivers' ? 'active bg-gradient-success' : '' }}"  href="{{ route('driver.index') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">groups</i>
                     </div>
@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'cars' ? 'active bg-gradient-primary' : '' }}"  href="{{ route('cars.index') }}">
+                <a class="nav-link {{ $activePage == 'cars' ? 'active bg-gradient-success' : '' }}"  href="{{ route('cars.index') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">directions_car</i>
                     </div>
@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'Trips' ? 'active bg-gradient-primary' : '' }}"  href="{{ route('trips.index') }}">
+                <a class="nav-link {{ $activePage == 'Trips' ? 'active bg-gradient-success' : '' }}"  href="{{ route('trips.index') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">mode_of_travel</i>
                     </div>
@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'notifications' ? 'active bg-gradient-primary' : '' }}" href="{{ route('dashboard') }}">
+                <a class="nav-link {{ $activePage == 'notifications' ? 'active bg-gradient-success' : '' }}" href="{{ route('dashboard') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">notifications</i>
                     </div>
@@ -55,7 +55,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'profile' ? 'active bg-gradient-primary' : '' }}" href="{{ route('profile') }}">
+                <a class="nav-link {{ $activePage == 'user profile' ? 'active bg-gradient-success' : '' }}" href="{{ route('user_profile') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">person</i>
                     </div>

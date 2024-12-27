@@ -63,7 +63,7 @@
                                        @endforeach
                                     </select>
                                     @error('driver_id')
-                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                        <p class='text-danger inputerror'>{{ $message }} </p>
                                     @enderror
                                 </div>
 

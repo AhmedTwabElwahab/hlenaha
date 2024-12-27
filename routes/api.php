@@ -25,12 +25,7 @@ Route::controller(AuthController::class)->group(function ()
 // الاشعارات
 // تعديل البروفايل
 Route::group(['middleware' => ['auth:sanctum', CheckAdmin::class]],function (){
-    //Users
-    Route::get('/users',[UserController::class,'index']);
-    Route::post('/users',[UserController::class,'store']);
-    Route::put('/users/{User}',[UserController::class,'update']);
-    Route::get('/users/{User}',[UserController::class,'show']);
-    Route::delete('/users/{User}',[UserController::class,'destroy']);
+
 
     //Driver
     Route::put('/driver/{driver}',[DriverController::class,'update']);

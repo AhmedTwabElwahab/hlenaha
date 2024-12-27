@@ -50,7 +50,7 @@
                     </ul>
                 </li>
                 <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0">
+                    <a href="{{route('user_profile')}}" class="nav-link text-body p-0">
                         <i class="material-icons">settings</i>
                     </a>
                 </li>

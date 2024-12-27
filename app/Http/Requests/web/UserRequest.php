@@ -8,10 +8,11 @@ class UserRequest extends FormRequest
 {
     protected array $rules = [
         'name'              => 'required|string',
-        'phone'             => 'required|string',
+        'phone'             => 'sometimes|nullable|string',
+        'gender'            => 'sometimes|nullable|string',
+        'birth_date'        => 'sometimes|nullable|date',
         'email'             => 'required|email|string',
         'password'          => 'required|min:4',
-        'active'            => 'sometimes|nullable|numeric|between:0,1',
     ];
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +24,9 @@ class UserRequest extends FormRequest
 
     protected function onUpdate(): array
     {
+        $this->rules['password'] = 'sometimes|nullable|min:4';
+        $this->rules['phone']    = 'sometimes|nullable|min:4';
+
         return $this->rules;
     }
     protected function onCreate(): array

@@ -20,11 +20,12 @@ use Illuminate\Contracts\Auth\CanResetPassword;
  * @property integer $id
  * @property string  $name
  * @property string  $phone
- * @property string  $about
+ * @property string  $gender
  * @property string  $email
  * @property string  $password
  * @property string  $role
- * @property integer  $balance
+ * @property string  $birth_date
+ * @property string  $updated_at
  *
  * RELATIONS PROPERTIES
  *
@@ -45,9 +46,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'location',
+        'birth_date',
         'phone',
-        'about',
+        'gender',
         'password_confirmation',
         'role'
     ];

@@ -37,23 +37,23 @@ Route::post('user-profile', [ProfileController::class, 'update'])->middleware('a
 
 Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
 {
-	Route::get('tables', function () {
-		return view('pages.tables');
-	})->name('tables');
-
-	Route::get('user-management', function () {
-		return view('pages.laravel-examples.user-management');
-	})->name('user-management');
-
-	Route::get('user-profile', function () {
-		return view('pages.laravel-examples.user-profile');
-	})->name('user-profile');
-
     Route::resource('driver', DriverController::class)->except('show')->names('driver');
     Route::resource('cars', CarController::class)->except('show')->names('cars');
 
     Route::get('/driver/bank_account/{driver}',[DriverController::class, 'bank_account'])->name('bank_account.driver');
     //Trips
     Route::resource('trips', TripController::class)->except('show')->names('trips');
+
+    Route::get('/user_profile',[ProfileController::class, 'index'])->name('user_profile');
+    Route::put('/user_profile/{user}',[ProfileController::class, 'update'])->name('user_profile.update');
+    Route::put('/user/forgotPassword',[ProfileController::class, 'forgotPassword'])->name('user_profile.forgotPassword');
+
+    //Users
+//    Route::get('/users',[UserController::class,'index']);
+//    Route::post('/users',[UserController::class,'store']);
+//    Route::put('/users/{User}',[UserController::class,'update']);
+//    Route::get('/users/{User}',[UserController::class,'show']);
+//    Route::delete('/users/{User}',[UserController::class,'destroy']);
+
 });
 
