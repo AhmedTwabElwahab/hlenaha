@@ -1,12 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BankAccountController;
 use App\Http\Controllers\Api\DriverController;
-use App\Http\Controllers\Api\TransactionController;
-use App\Http\Controllers\Api\UserController;
 use App\Http\Middleware\CheckAdmin;
+use Illuminate\Support\Facades\Route;
 
 
 Route::controller(AuthController::class)->group(function ()

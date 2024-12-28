@@ -10,6 +10,7 @@ return [
     'personalInfo'           => 'حسابي',
     'bank_account'           => 'الحسابات البنكية',
     'Trips'                  => 'الرحلات',
+    'transaction'            => 'التحويلات',
 
 
 

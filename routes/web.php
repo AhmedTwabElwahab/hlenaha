@@ -3,6 +3,7 @@
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TripController;
 use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
@@ -54,12 +55,9 @@ Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
     Route::delete('/bank_account/{bankAccount}',[BankAccountController::class,'destroy'])->name('bank_account.destroy');
 
     //Transaction
-//    Route::get('/transaction',[TransactionController::class,'index']);
-//    Route::post('/transaction',[TransactionController::class,'store']);
-//    Route::put('/transaction/{transaction}',[TransactionController::class,'update']);
-//    Route::get('/transaction/{transaction}',[TransactionController::class,'show']);
-//    Route::delete('/transaction/{transaction}',[TransactionController::class,'destroy']);
+    Route::resource('transaction', TransactionController::class)->except('show')->names('transaction');
 
+    Route::post('bank_account/get',[BankAccountController::class,'query'])->name('bank_account.query');
     //Users
 //    Route::get('/users',[UserController::class,'index']);
 //    Route::post('/users',[UserController::class,'store']);

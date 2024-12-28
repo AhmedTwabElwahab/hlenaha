@@ -55,6 +55,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ $activePage == 'transaction' ? 'active bg-gradient-success' : '' }}" href="{{ route('transaction.index') }}">
+                    <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">cached</i>
+                    </div>
+                    <span class="nav-link-text me-1">{{__('global.transaction')}}</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ $activePage == 'user profile' ? 'active bg-gradient-success' : '' }}" href="{{ route('user_profile') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">person</i>

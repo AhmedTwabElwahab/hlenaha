@@ -17,8 +17,10 @@ class TransactionFactory extends Factory
     {
         return [
 			'bank_account_id'       => $this->faker->numberBetween(1, 10),
+			'driver_bank_account_id'=> $this->faker->numberBetween(2, 10),
 			'driver_id'             => $this->faker->numberBetween(1, 10),
 			'amount'                => $this->faker->randomNumber(4),
+			'fees'                  => 5,
 			'description'           => $this->faker->sentence(4),
 			'date'                  => $this->faker->date(),
         ];

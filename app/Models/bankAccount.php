@@ -34,13 +34,13 @@ class bankAccount extends Model
     protected $dateFormat = 'Y:m:d H:i:s';
     protected $fillable = [
         'id',
-        'account_name',
+        'bank_account_name_id',
         'driver_id',
         'account_number',
         'iban',
         'disc',
         'is_default',
-
+        'user_id'
     ];
 
     /**

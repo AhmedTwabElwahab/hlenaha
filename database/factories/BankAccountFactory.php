@@ -20,7 +20,7 @@ class BankAccountFactory extends Factory
     {
         return [
 			'bank_account_name_id'      => $this->faker->numberBetween(2, 10),
-			'user_id'           => 1,
+			'user_id'                   => $this->faker->numberBetween(2, 10),
 			'account_number'    => $this->faker->randomNumber(4),
 			'iban'              => $this->faker->randomNumber(4),
 			'disc'              => $this->faker->sentence(4),

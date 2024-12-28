@@ -1,4 +1,4 @@
-<ul class="pagination pagination-info">
+<ul class="pagination pagination-success">
     <li class="page-item">
         <a class="page-link" href="{{"?page=".$pagination->currentPage() -1}}" aria-label="Previous">
             <span aria-hidden="true">

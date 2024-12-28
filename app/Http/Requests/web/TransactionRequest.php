@@ -10,8 +10,10 @@ class TransactionRequest extends FormRequest
 {
     protected array $rules = [
         'bank_account_id'         => 'required|numeric|exists:bank_accounts,id',
-        'driver_id'               => 'required|numeric|exists:drivers,id',
+        'driver_bank_account_id'  => 'required|numeric|exists:bank_accounts,id',
+        'driver_id'               => 'sometimes|nullable|numeric|exists:drivers,id',
         'amount'                  => 'required|numeric',
+        'fees'                    => 'sometimes|nullable|numeric',
         'description'             => 'required|string',
         'date'                    => 'required|date',
     ];

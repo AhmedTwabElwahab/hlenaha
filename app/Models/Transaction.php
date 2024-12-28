@@ -14,8 +14,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  *
  * @property integer  $id
  * @property integer  $bank_account_id
+ * @property integer  $driver_bank_account_id
  * @property integer  $driver_id
  * @property integer  $amount
+ * @property integer  $fees
  * @property string   $description
  * @property string   $date
  * @property string   $updated_at
@@ -49,10 +51,14 @@ class Transaction extends Model
     {
         $Transaction = new self();
 
+        $seem = $request->input('bank_account_id') === $request->input('driver_bank_account_id');
+
         $Transaction->id                    = $request->input('id');
         $Transaction->bank_account_id       = $request->input('bank_account_id');
+        $Transaction->driver_bank_account_id       = $request->input('driver_bank_account_id');
         $Transaction->driver_id             = $request->input('driver_id');
         $Transaction->amount                = $request->input('amount');
+        $Transaction->fees                  = $seem ? 0 : 5 ;
         $Transaction->description           = $request->input('description');
         $Transaction->date                  = $request->input('date');
 
@@ -67,11 +73,16 @@ class Transaction extends Model
 
     public function bankAccount(): HasOne
     {
-        return $this->hasOne('bank_account_id',bankAccount::class,'id');
+        return $this->hasOne(bankAccount::class,'id','driver_bank_account_id');
+    }
+
+    public function ourBankAccount(): HasOne
+    {
+        return $this->hasOne(bankAccount::class,'id','bank_account_id');
     }
 
     public function driver(): HasOne
     {
-        return $this->hasOne('driver_id',Driver::class,'id');
+        return $this->hasOne(Driver::class,'id','driver_id');
     }
 }

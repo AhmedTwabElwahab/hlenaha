@@ -8,8 +8,9 @@ use App\Models\bankAccount;
 use App\Models\bankAccountName;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class BankAccountController extends BaseController
 {
@@ -113,5 +114,23 @@ class BankAccountController extends BaseController
             $message = $this->handleException($e);
             return $this->failed($message);
         }
+    }
+
+    public function query(Request $request)
+    {
+        if (!$request->has('key'))
+        {
+            return $this->failed('not Found');
+        }
+
+        if(Schema::hasColumn('bank_accounts', $request->input('key')))
+        {
+            $banks = bankAccount::join('bank_account_names', 'bank_account_names.id', '=', 'bank_accounts.bank_account_name_id')
+                ->select('bank_accounts.id', 'bank_account_names.name')
+                ->where('bank_accounts.user_id', '=', $request->input('value'))
+                ->get();
+            return $banks;
+        }
+        return $this->failed('not Found');
     }
 }
