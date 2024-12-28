@@ -47,11 +47,11 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'notifications' ? 'active bg-gradient-success' : '' }}" href="{{ route('dashboard') }}">
+                <a class="nav-link {{ $activePage == 'banks' ? 'active bg-gradient-success' : '' }}" href="{{ route('bank_account') }}">
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
+                        <i class="material-icons opacity-10">assured_workload</i>
                     </div>
-                    <span class="nav-link-text me-1">{{__('global.notifications')}}</span>
+                    <span class="nav-link-text me-1">{{__('global.bank_account')}}</span>
                 </a>
             </li>
             <li class="nav-item">

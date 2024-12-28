@@ -9,13 +9,12 @@ use Illuminate\Foundation\Http\FormRequest;
 class BankAccountRequest extends FormRequest
 {
     protected array $rules = [
-        'account_name'      => 'required|string',
-        'driver_id'         => 'required|numeric|exists:drivers,id',
-        'user_id'           => 'required|numeric|exists:users,id',
-        'account_number'    => 'required|numeric',
-        'iban'              => 'required|numeric',
-        'disc'              => 'required|string',
-        'is_default'        => 'required|numeric',
+        'bank_account_name_id'      => 'required|numeric|exists:bank_account_names,id',
+        'user_id'                   => 'sometimes|nullable|numeric|exists:users,id',
+        'account_number'            => 'required|numeric',
+        'iban'                      => 'required|numeric',
+        'disc'                      => 'required|string',
+        'is_default'                => 'sometimes|nullable|numeric',
     ];
     /**
      * Determine if the user is authorized to make this request.

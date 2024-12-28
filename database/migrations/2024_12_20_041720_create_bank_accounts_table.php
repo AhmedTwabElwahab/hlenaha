@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('account_name',255);
+            $table->foreignId('bank_account_name_id');
             $table->foreignId('user_id');
             $table->string('account_number',255);
             $table->string('iban',255);
             $table->string('disc',255);
             $table->boolean('is_default')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('bank_account_name_id')->references('id')->on('bank_account_names');
         });
     }
 

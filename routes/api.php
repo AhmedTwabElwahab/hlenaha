@@ -36,11 +36,6 @@ Route::group(['middleware' => ['auth:sanctum', CheckAdmin::class]],function (){
     Route::put('/bank_account/{bankAccount}',[BankAccountController::class,'update']);
     Route::delete('/bank_account/{bankAccount}',[BankAccountController::class,'destroy']);
 
-    //Transaction
-    Route::get('/transaction',[TransactionController::class,'index']);
-    Route::post('/transaction',[TransactionController::class,'store']);
-    Route::put('/transaction/{transaction}',[TransactionController::class,'update']);
-    Route::get('/transaction/{transaction}',[TransactionController::class,'show']);
-    Route::delete('/transaction/{transaction}',[TransactionController::class,'destroy']);
+
 
 });

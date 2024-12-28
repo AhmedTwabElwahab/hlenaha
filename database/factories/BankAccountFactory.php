@@ -19,7 +19,7 @@ class BankAccountFactory extends Factory
     public function definition(): array
     {
         return [
-			'account_name'      => $this->faker->name(),
+			'bank_account_name_id'      => $this->faker->numberBetween(2, 10),
 			'user_id'           => 1,
 			'account_number'    => $this->faker->randomNumber(4),
 			'iban'              => $this->faker->randomNumber(4),

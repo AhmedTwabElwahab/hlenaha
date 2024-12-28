@@ -4,22 +4,7 @@
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage=" {{__('trip/index.add_trip')}}" parent="{{__('global.Trips')}}"></x-navbars.navs.auth>
         <!-- End Navbar -->
-        {{--        Display all errors--}}
-        <div class="container-fluid px-2 px-md-4">
-            @foreach($errors->all() as $error)
-                <div class="row">
-                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                        <span class="text-sm">{{ $error }}</span>
-                        <button type="button" class="btn-close text-lg py-3 opacity-10"
-                                data-bs-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        {{--        Display all errors--}}
-
+        <x-error></x-error>
         <div class="container-fluid px-2 px-md-4">
             <div class="page-header min-height-100 border-radius-xl mt-4"  style="background-image: linear-gradient(to left bottom, #002f6c, #00528f, #007392, #008f75, #28a745);">
                 <span class="mask opacity-6">

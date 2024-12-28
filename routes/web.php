@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\BankAccountController;
+use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\TripController;
@@ -8,14 +8,11 @@ use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
-Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
 Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest')->name('login');
 Route::post('sign-in', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
@@ -47,6 +44,21 @@ Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
     Route::get('/user_profile',[ProfileController::class, 'index'])->name('user_profile');
     Route::put('/user_profile/{user}',[ProfileController::class, 'update'])->name('user_profile.update');
     Route::put('/user/forgotPassword',[ProfileController::class, 'forgotPassword'])->name('user_profile.forgotPassword');
+
+    //bankAccount
+    Route::get('/bank_account',[BankAccountController::class,'index'])->name('bank_account');
+    Route::get('/bank_account/{account}/edit',[BankAccountController::class,'edit'])->name('bank_account.edit');
+    Route::get('/bank_account/create',[BankAccountController::class,'create'])->name('bank_account.create');
+    Route::post('/bank_account',[BankAccountController::class,'store'])->name('bank_account.store');
+    Route::put('/bank_account/{bankAccount}',[BankAccountController::class,'update'])->name('bank_account.update');
+    Route::delete('/bank_account/{bankAccount}',[BankAccountController::class,'destroy'])->name('bank_account.destroy');
+
+    //Transaction
+//    Route::get('/transaction',[TransactionController::class,'index']);
+//    Route::post('/transaction',[TransactionController::class,'store']);
+//    Route::put('/transaction/{transaction}',[TransactionController::class,'update']);
+//    Route::get('/transaction/{transaction}',[TransactionController::class,'show']);
+//    Route::delete('/transaction/{transaction}',[TransactionController::class,'destroy']);
 
     //Users
 //    Route::get('/users',[UserController::class,'index']);

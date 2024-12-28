@@ -7,13 +7,14 @@ use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Bank_account
  * @package App\Models
  *
  * @property integer  $id
- * @property string   $account_name
+ * @property string   $bank_account_name_id
  * @property integer  $user_id
  * @property integer  $account_number
  * @property integer  $iban
@@ -29,7 +30,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class bankAccount extends Model
 {
-    use HasFactory;
+    use HasFactory,softDeletes;
     protected $dateFormat = 'Y:m:d H:i:s';
     protected $fillable = [
         'id',
@@ -49,12 +50,12 @@ class bankAccount extends Model
     {
         $Bank_account = new self();
 
-        $Bank_account->account_name     = $request->input('account_name');
-        $Bank_account->user_id          = $request->input('user_id');
-        $Bank_account->account_number   = $request->input('account_number');
-        $Bank_account->iban             = $request->input('iban');
-        $Bank_account->disc             = $request->input('disc');
-        $Bank_account->is_default       = $request->input('is_default');
+        $Bank_account->bank_account_name_id     = $request->input('bank_account_name_id');
+        $Bank_account->user_id                  = $request->input('user_id') ?? auth()->id();
+        $Bank_account->account_number           = $request->input('account_number');
+        $Bank_account->iban                     = $request->input('iban');
+        $Bank_account->disc                     = $request->input('disc');
+        $Bank_account->is_default               = $request->input('is_default');
 
 
         if (!$Bank_account->save())
@@ -65,9 +66,13 @@ class bankAccount extends Model
     }
 
 
-
     public function user(): HasOne
     {
-        return $this->hasOne('user_id',User::class,'id');
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
+    public function bank_name(): HasOne
+    {
+        return $this->hasOne(bankAccountName::class,'id','bank_account_name_id');
     }
 }
