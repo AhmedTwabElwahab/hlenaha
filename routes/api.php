@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BankAccountController;
 use App\Http\Controllers\Api\DriverController;
+use App\Http\Controllers\Api\SettingController;
 use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ Route::controller(AuthController::class)->group(function ()
 // الرسائل
 // الاشعارات
 // تعديل البروفايل
-Route::group(['middleware' => ['auth:sanctum', CheckAdmin::class]],function (){
+Route::group(['middleware' => ['auth:sanctum']],function (){
 
 
     //Driver
@@ -30,10 +31,14 @@ Route::group(['middleware' => ['auth:sanctum', CheckAdmin::class]],function (){
     Route::get('/driver/{driver}',[DriverController::class,'show']);
 
     //bankAccount
+    Route::get('/bank_account/{bankAccount}',[BankAccountController::class,'show']);
     Route::post('/bank_account',[BankAccountController::class,'store']);
     Route::put('/bank_account/{bankAccount}',[BankAccountController::class,'update']);
     Route::delete('/bank_account/{bankAccount}',[BankAccountController::class,'destroy']);
 
-
+    //settings
+    Route::get('/settings',[SettingController::class,'index']);
+    Route::post('/settings',[SettingController::class,'store']);
+    Route::put('/settings/{setting}',[SettingController::class,'update']);
 
 });

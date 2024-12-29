@@ -78,26 +78,24 @@ class User extends Authenticatable
         $user = new User();
         $user->name             = $request->input('name');
         $user->phone            = $request->input('phone');
-        $user->about            = $request->input('about') ?? null;
         $user->email            = $request->input('email');
-        $user->password         = Hash::make($request->input('password'));
+        $user->password         = Hash::make(123456);
         $user->role             = $request->input('role') ?? USER_ROLE;
 
         if (!$user->save())
         {
             throw new \Exception("Failed to create user");
         }
+
+        setting::createSetting($user->id, 'APP_lang', 'ar');
+        setting::createSetting($user->id, 'APP_notifications', true);
+
         return $user;
     }
 
     public function isAdmin()
     {
         return $this->role === 'ROLE_ADMIN';
-    }
-
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
     }
 
     public function driver():HasOne

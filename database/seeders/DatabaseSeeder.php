@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\bankAccount;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 
 class DatabaseSeeder extends Seeder
@@ -18,9 +19,9 @@ class DatabaseSeeder extends Seeder
     {
          User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@material.com',
+            'email' => 'admin@admin.com',
             'role' => ADMIN_ROLE,
-            'password' => ('secret')
+            'password' => Hash::make(123456)
         ]);
         $this->call([
              UserSeeder::class,

@@ -34,6 +34,9 @@ class DriverRequest extends FormRequest
     protected function onUpdate(): array
     {
         $this->rules['user_id'] = 'sometimes|nullable|numeric';
+        $this->rules['email']   = 'sometimes|nullable|email';
+        $this->rules['id_number'] = 'sometimes|nullable|numeric|';
+        $this->rules['phone'] = 'sometimes|nullable|numeric';
         return $this->rules;
     }
     protected function onCreate(): array
