@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BankAccountController;
-use App\Http\Controllers\Api\DriverController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\SettingController;
-use App\Http\Middleware\CheckAdmin;
+use App\Http\Controllers\Api\VerificationApiController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 Route::controller(AuthController::class)->group(function ()
@@ -18,19 +19,24 @@ Route::controller(AuthController::class)->group(function ()
     Route::post('verify-api','forgetPassword')->middleware('guest')->name('verify-api');
 });
 
-//الاعدادات
-// اضافة حساب
+Route::get('/email/verify/{id}/{hash}',[VerificationApiController::class,'verify'])->name('verification.verify');
+
 // الرسائل
 // الاشعارات
 // تعديل البروفايل
-Route::group(['middleware' => ['auth:sanctum']],function (){
+Route::group(['middleware' => ['auth:sanctum']],function ()
+{
+    //Email
+    Route::post('email/resend', [VerificationApiController::class,'resend'])->name('verificationapi.verify');
 
+    //profile
+    Route::get('/profile',[ProfileController::class,'index']);
+    Route::put('/profile',[ProfileController::class,'update']);
+    Route::post('/profile/forgotPassword',[ProfileController::class,'forgotPassword']);
 
-    //Driver
-    Route::put('/driver/{driver}',[DriverController::class,'update']);
-    Route::get('/driver/{driver}',[DriverController::class,'show']);
 
     //bankAccount
+    Route::get('/bank_account',[BankAccountController::class,'index']);
     Route::get('/bank_account/{bankAccount}',[BankAccountController::class,'show']);
     Route::post('/bank_account',[BankAccountController::class,'store']);
     Route::put('/bank_account/{bankAccount}',[BankAccountController::class,'update']);

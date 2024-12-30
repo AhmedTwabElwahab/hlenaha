@@ -7,6 +7,7 @@ use App\Models\bankAccount;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BankAccountController extends BaseController
@@ -17,7 +18,7 @@ class BankAccountController extends BaseController
      */
     public function index(): JsonResponse
     {
-        $BankAccounts = BankAccount::all();
+        $BankAccounts = BankAccount::where('user_id',auth()->id())->get();
         return $this->sendResponse($BankAccounts, 'All drivers have arrived.');
     }
 
@@ -49,7 +50,11 @@ class BankAccountController extends BaseController
      */
     public function show(bankAccount $bankAccount):JsonResponse
     {
-        return $this->sendResponse($bankAccount, 'BackAccounts info');
+        if($bankAccount->user_id == auth()->user()->id)
+        {
+            return $this->sendResponse($bankAccount, 'BackAccounts info');
+        }
+        return $this->failed('Not allowed');
     }
 
     /**
@@ -63,9 +68,12 @@ class BankAccountController extends BaseController
         DB::beginTransaction();
         try
         {
-            $bankAccount->account_name     = $request->input('account_name');
-            $bankAccount->driver_id        = $request->input('driver_id');
-            $bankAccount->user_id          = $request->input('user_id');
+            if($bankAccount->user_id !== auth()->id())
+            {
+                return $this->failed('Not allowed');
+            }
+            $bankAccount->bank_account_name_id     = $request->input('bank_account_name_id');
+            $bankAccount->user_id          = auth()->id();
             $bankAccount->account_number   = $request->input('account_number');
             $bankAccount->iban             = $request->input('iban');
             $bankAccount->disc             = $request->input('disc');

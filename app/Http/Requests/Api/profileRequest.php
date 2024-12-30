@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Requests\web;
+namespace App\Http\Requests\Api;
 
-
-use App\Http\Requests\Api\APIRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BankAccountRequest extends APIRequest
+class profileRequest extends APIRequest
 {
     protected array $rules = [
-        'bank_account_name_id'      => 'required|numeric|exists:bank_account_names,id',
-        'user_id'                   => 'sometimes|nullable|numeric|exists:users,id',
-        'account_number'            => 'required|numeric',
-        'iban'                      => 'required|numeric',
-        'disc'                      => 'required|string',
-        'is_default'                => 'sometimes|nullable|numeric',
+        'name'              => 'sometimes|nullable|string',
+        'phone'             => 'sometimes|nullable|string',
+        'gender'            => 'sometimes|nullable|string',
+        'birth_date'        => 'sometimes|nullable|date',
+        'email'             => 'sometimes|nullable|email|string',
+        'password'          => 'required|min:4',
     ];
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +24,9 @@ class BankAccountRequest extends APIRequest
 
     protected function onUpdate(): array
     {
+        $this->rules['password'] = 'sometimes|nullable|min:4';
+        $this->rules['phone']    = 'sometimes|nullable|min:4';
+
         return $this->rules;
     }
     protected function onCreate(): array

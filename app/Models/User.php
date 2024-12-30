@@ -33,7 +33,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
  * @method static create(...$arg)
  */
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, softDeletes;
 
@@ -45,12 +45,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
         'birth_date',
         'phone',
         'gender',
-        'password_confirmation',
-        'role'
     ];
 
     /**
@@ -61,6 +58,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'role',
+        'api_token',
     ];
 
     /**

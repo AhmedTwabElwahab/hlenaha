@@ -29,6 +29,11 @@ class SessionsController extends Controller
                 'email' => 'Your provided credentials could not be verified.'
             ]);
         }
+        if(auth()->user()->role != ADMIN_ROLE)
+        {
+            auth()->logout();
+            return redirect('/sign-in');
+        }
 
         session()->regenerate();
 

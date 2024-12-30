@@ -29,9 +29,6 @@ Route::get('/reset-password/{token}', function ($token) {
 
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
 
-Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
-
-Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 
 Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
 {
@@ -58,6 +55,11 @@ Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
     Route::resource('transaction', TransactionController::class)->except('show')->names('transaction');
 
     Route::post('bank_account/get',[BankAccountController::class,'query'])->name('bank_account.query');
+
+    Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
+
+    Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
+
     //Users
 //    Route::get('/users',[UserController::class,'index']);
 //    Route::post('/users',[UserController::class,'store']);

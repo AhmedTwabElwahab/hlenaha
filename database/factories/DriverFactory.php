@@ -19,7 +19,6 @@ class DriverFactory extends Factory
         return [
 			'name'              => $this->faker->name(),
 			'id_number'         => $this->faker->randomNumber(4),
-			'phone'             => $this->faker->randomNumber(4),
 			'country'           => $this->faker->country(),
 			'city'              => $this->faker->city(),
 			'district'          => $this->faker->country,

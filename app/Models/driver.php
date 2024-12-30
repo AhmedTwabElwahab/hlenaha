@@ -65,7 +65,6 @@ class driver extends Model
 
         $Driver->name               = $request->input('name');
         $Driver->id_number          = $request->input('id_number');
-        $Driver->phone              = $request->input('phone');
         $Driver->country            = $request->input('country')?? null;
         $Driver->city               = $request->input('city')?? null;
         $Driver->district           = $request->input('district')?? null;
@@ -106,7 +105,6 @@ class driver extends Model
         $Driver = Driver::where('id', $driver)->first();
         $Driver->name               = $request->input('name') ?? $Driver->name;
         $Driver->id_number          = $request->input('id_number') ?? $Driver->id_number;
-        $Driver->phone              = $request->input('phone') ?? $Driver->phone;
         $Driver->country            = $request->input('country') ?? $Driver->country;
         $Driver->city               = $request->input('city') ?? $Driver->city;
         $Driver->district           = $request->input('district') ?? $Driver->district;

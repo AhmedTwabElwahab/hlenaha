@@ -1,41 +1,43 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\web\UserRequest;
-use App\Http\Requests\web\UserRestPasswordRequest;
+use App\Http\Requests\Api\profileRequest;
+use App\Http\Requests\api\UserRestPasswordRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        $user = auth()->user();
-        return view('profile.index', compact('user'));
+        $user = User::where('id', auth()->user()->id)->with(['driver'])->get();
+        return $this->sendResponse($user, 'Users retrieved successfully.');
     }
 
 
-    public function update(UserRequest $request, User $User)
+    public function update(profileRequest $request)
     {
         DB::beginTransaction();
         try
         {
+            $User = auth()->user();
+            $send_Email = false;
+            if ($request->input('email') !== $User->email)
+            {
+                $send_Email = true;
+                $User->email_verified_at = null;
+            }
             $User->name               = $request->input('name') ?? $User->name;
             $User->email              = $request->input('email') ?? $User->email;
             $User->gender             = $request->input('gender');
             $User->phone              = $request->input('phone') ?? $User->phone;
             $User->birth_date         = $request->input('birth_date');
-
-            if ($request->has('password'))
-            {
-                $User->password           = Hash::make($request->input('password'));
-            }
             $User->updated_at         = Carbon::now();
 
             if (!$User->update())
@@ -43,7 +45,9 @@ class ProfileController extends Controller
                 throw new Exception('update_error');
             }
             DB::commit();
-            return redirect()->back()->withStatus(__('global.create_success'));
+
+            $send_Email ? $User->sendEmailVerificationNotification() : '';
+            return $this->sendResponse($User, 'User updated successfully.');
         } catch (Exception $e)
         {
             DB::rollBack();
@@ -68,7 +72,7 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
             DB::commit();
-            return redirect()->back()->withStatus(__('global.update_success'));
+            return $this->sendResponse($user,__('global.update_success'));
         } catch (Exception $e)
         {
             DB::rollBack();

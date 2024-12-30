@@ -51,11 +51,6 @@
                                         <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Change
                                             password</button>
                                     </div>
-                                    <p class="mt-4 text-sm text-center">
-                                        Don't have an account?
-                                        <a href="{{ route('register') }}"
-                                            class="text-primary text-gradient font-weight-bold">Sign up</a>
-                                    </p>
                                 </form>
                             </div>
                         </div>
