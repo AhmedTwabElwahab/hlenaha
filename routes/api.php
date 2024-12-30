@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BankAccountController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\VerificationApiController;
@@ -46,5 +47,10 @@ Route::group(['middleware' => ['auth:sanctum']],function ()
     Route::get('/settings',[SettingController::class,'index']);
     Route::post('/settings',[SettingController::class,'store']);
     Route::put('/settings/{setting}',[SettingController::class,'update']);
+
+    //messages
+    Route::post('messages',[MessageController::class,'store'])->name('messages.store');
+    Route::get('messages',[MessageController::class,'show'])->name('messages.show');
+
 
 });

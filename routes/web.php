@@ -3,6 +3,7 @@
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TripController;
 use App\Http\Middleware\CheckAdmin;
@@ -59,6 +60,12 @@ Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
     Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 
     Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
+
+    //messages
+    Route::get('messages',[MessageController::class,'index'])->name('messages.index');
+    Route::post('messages',[MessageController::class,'store'])->name('messages.store');
+    Route::get('messages/{web_user}',[MessageController::class,'show'])->name('messages.show');
+
 
     //Users
 //    Route::get('/users',[UserController::class,'index']);

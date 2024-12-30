@@ -70,6 +70,14 @@
                     <span class="nav-link-text me-1">{{__('global.personalInfo')}}</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $activePage == 'messages' ? 'active bg-gradient-success' : '' }}" href="{{ route('messages.index') }}">
+                    <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">chat</i>
+                    </div>
+                    <span class="nav-link-text me-1">{{__('global.messages')}}</span>
+                </a>
+            </li>
 
         </ul>
     </div>

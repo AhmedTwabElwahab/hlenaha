@@ -128,9 +128,6 @@
                                                        value="1">
                                                 <label class="form-check-label" for="driver_active">{{__('drivers/edit.status')}}</label>
                                             </div>
-                                            <div class="mb-3 col-md-6">
-
-                                            </div>
 
                                         </div>
                                         <button type="submit" class="btn bg-gradient-dark">{{__('drivers/index.add')}}</button>

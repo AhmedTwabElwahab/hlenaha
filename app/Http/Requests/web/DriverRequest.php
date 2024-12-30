@@ -10,7 +10,7 @@ class DriverRequest extends FormRequest
         'name'              => 'required|string',
         'email'             => 'required|email|unique:users,email',
         'id_number'         => 'required|numeric|unique:drivers,id_number',
-        'phone'             => 'required|string|unique:drivers,phone',
+        'phone'             => 'required|string|unique:users,phone',
         'country'           => 'sometimes|nullable|string',
         'city'              => 'sometimes|nullable|string',
         'district'          => 'sometimes|nullable|string',

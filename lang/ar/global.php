@@ -11,6 +11,7 @@ return [
     'bank_account'           => 'الحسابات البنكية',
     'Trips'                  => 'الرحلات',
     'transaction'            => 'التحويلات',
+    'messages'               => 'الرسائل',
 
 
 

@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 
 class DriverController extends BaseController
@@ -24,9 +25,9 @@ class DriverController extends BaseController
         {
             $search = $request->get('search');
             $drivers = Driver::Join('users', 'drivers.user_id', '=', 'users.id')
-                ->select('drivers.*', 'users.email')
+                ->select('drivers.*', 'users.email', 'users.phone')
                 ->where('drivers.name','LIKE','%'.$search.'%')
-                ->orWhere('drivers.phone','LIKE','%'.$search.'%')
+                ->orWhere('users.phone','LIKE','%'.$search.'%')
                 ->orWhere('users.email','LIKE','%'.$search.'%')
                 ->orWhere('id_number','LIKE','%'.$search.'%')
                 ->orWhere('country','LIKE','%'.$search.'%')
