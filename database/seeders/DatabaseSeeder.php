@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
              UserSeeder::class,
              //DriverSeeder::class,
-             //BankAccountNameSeeder::class,
+             BankAccountNameSeeder::class,
              carSeeder::class,
              ProvincesTableSeeder::class,
              CitiesTableSeeder::class,

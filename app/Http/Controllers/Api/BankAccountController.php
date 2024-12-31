@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\web\BankAccountRequest;
 use App\Models\bankAccount;
+use App\Notifications\BankAccountCreated;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -34,6 +35,8 @@ class BankAccountController extends BaseController
         {
             $Bank_account = BankAccount::createBankAccount($request);
             DB::commit();
+            $user = auth()->user();
+            $user->notify(new BankAccountCreated('create succes'));
             return $this->sendResponse($Bank_account,'success_add');
         } catch (Exception $e)
         {
