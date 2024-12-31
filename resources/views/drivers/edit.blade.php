@@ -92,7 +92,7 @@
                                         <option value="">--</option>
 
                                         @foreach($provinces as $province)
-                                            <option value="{{$province->name_ar}}" @if($driver->province == $province->name_ar) selected @endif>&nbsp;&nbsp; {{$province->name_ar}}</option>
+                                            <option @if($driver->province == $province->name_ar) selected @endif value="{{$province->name_ar}}">&nbsp;&nbsp;{{$province->name_ar}}</option>
                                         @endforeach
                                     </select>
                                 </div>
