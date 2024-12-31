@@ -16,9 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('name',255);
             $table->string('id_number',50);
-            $table->string('country',255)->nullable();
+            $table->string('province',255)->nullable();
             $table->string('city',255)->nullable();
-            $table->string('district',255)->nullable();
+            $table->string('neighborhood',255)->nullable();
             $table->string('street',255)->nullable();
             $table->integer('building_number',false,true)->nullable();
             $table->integer('postal_code',false,true)->nullable();

@@ -19,9 +19,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string   $name
  * @property integer  $id_number
  * @property string   $phone
- * @property string   $country
+ * @property string   $province
  * @property string   $city
- * @property string   $district
+ * @property string   $neighborhood
  * @property string   $street
  * @property integer  $building_number
  * @property integer  $postal_code
@@ -65,9 +65,9 @@ class driver extends Model
 
         $Driver->name               = $request->input('name');
         $Driver->id_number          = $request->input('id_number');
-        $Driver->country            = $request->input('country')?? null;
+        $Driver->province           = $request->input('province')?? null;
         $Driver->city               = $request->input('city')?? null;
-        $Driver->district           = $request->input('district')?? null;
+        $Driver->neighborhood       = $request->input('neighborhood')?? null;
         $Driver->street             = $request->input('street')?? null;
         $Driver->building_number    = $request->input('building_number')?? null;
         $Driver->postal_code        = $request->input('postal_code')?? null;
@@ -105,9 +105,9 @@ class driver extends Model
         $Driver = Driver::where('id', $driver)->first();
         $Driver->name               = $request->input('name') ?? $Driver->name;
         $Driver->id_number          = $request->input('id_number') ?? $Driver->id_number;
-        $Driver->country            = $request->input('country') ?? $Driver->country;
+        $Driver->province           = $request->input('province') ?? $Driver->province;
         $Driver->city               = $request->input('city') ?? $Driver->city;
-        $Driver->district           = $request->input('district') ?? $Driver->district;
+        $Driver->neighborhood       = $request->input('neighborhood') ?? $Driver->neighborhood;
         $Driver->street             = $request->input('street') ?? $Driver->street;
         $Driver->building_number    = $request->input('building_number') ?? $Driver->building_number;
         $Driver->postal_code        = $request->input('postal_code') ?? $Driver->postal_code;

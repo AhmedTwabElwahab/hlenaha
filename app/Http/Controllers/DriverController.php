@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\web\DriverRequest;
 use App\Models\bankAccount;
+use App\Models\city;
 use App\Models\driver;
+use App\Models\neighborhood;
+use App\Models\province;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -47,7 +50,10 @@ class DriverController extends BaseController
      */
     public function create(): View
     {
-        return view('drivers.create');
+        $provinces = Province::all();
+        $cities = City::all();
+        $neighborhoods = neighborhood::all();
+        return view('drivers.create',compact('provinces','cities','neighborhoods'));
     }
 
     /**
@@ -82,7 +88,10 @@ class DriverController extends BaseController
      */
     public function edit(driver $driver): View
     {
-        return view('drivers.edit', compact('driver'));
+        $provinces = Province::all();
+        $cities = City::all();
+        $neighborhoods = neighborhood::all();
+        return view('drivers.edit', compact('driver'),compact('provinces','cities','neighborhoods'));
     }
 
     /**

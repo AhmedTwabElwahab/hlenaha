@@ -60,27 +60,48 @@
                                             </div>
 
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label">{{__('drivers/edit.country')}}</label>
-                                                <input type="text" name="country" class="form-control border border-2 p-2" value='{{ old('country') }}'>
-                                                @error('country')
-                                                <p class='text-danger inputerror'>{{ $message }} </p>
-                                                @enderror
+                                                <label class="form-label">{{__('drivers/edit.province')}}</label>
+                                                <select class="form-select border border-2 p-2"
+                                                        name="province"
+                                                        data-style="select-with-transition"
+                                                        data-size="100"
+                                                        id="province_id"
+                                                >
+                                                    <option value="">--</option>
+                                                    @foreach($provinces as $province)
+                                                        <option value="{{$province->name_ar}}">&nbsp;&nbsp; {{$province->name_ar}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label">{{__('drivers/edit.city')}}</label>
-                                                <input type="text" name="city" class="form-control border border-2 p-2" value='{{ old('city') }}'>
-                                                @error('city')
-                                                <p class='text-danger inputerror'>{{ $message }} </p>
-                                                @enderror
+                                                <select class="form-select border border-2 p-2"
+                                                        name="city"
+                                                        data-style="select-with-transition"
+                                                        data-size="100"
+                                                        id="city_id"
+                                                >
+                                                    <option value="">--</option>
+                                                    @foreach($cities as $city)
+                                                        <option value="{{$city->name_ar}}">&nbsp;&nbsp; {{$city->name_ar}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label">{{__('drivers/edit.district')}}</label>
-                                                <input type="text" name="district" class="form-control border border-2 p-2" value='{{ old('district') }}'>
-                                                @error('district')
-                                                <p class='text-danger inputerror'>{{ $message }} </p>
-                                                @enderror
+                                                <select class="form-select border border-2 p-2"
+                                                        name="neighborhood"
+                                                        data-style="select-with-transition"
+                                                        data-size="100"
+                                                        id="neighborhood_id"
+                                                >
+                                                    <option value="">--</option>
+                                                    @foreach($neighborhoods as $neighborhood)
+                                                        <option value="{{$neighborhood->name_ar}}">&nbsp;&nbsp; {{$neighborhood->name_ar}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="mb-3 col-md-4">

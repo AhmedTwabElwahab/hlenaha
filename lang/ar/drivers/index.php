@@ -25,6 +25,7 @@ return [
     'default'                 => 'نوع الحساب',
     'main'                    => 'رئيسي',
     'view_bankAccount'         => 'عرض الحسابات البنكية للسائق',
+    'province'                  => 'المنطقة',
 
 
 ];

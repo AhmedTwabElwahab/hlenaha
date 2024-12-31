@@ -75,34 +75,56 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">{{__('drivers/edit.phone')}}</label>
-                                    <input type="number" name="phone" class="form-control border border-2 p-2" value='{{ old('phone',$driver->phone) }}'>
+                                    <input type="number" name="phone" class="form-control border border-2 p-2" value='{{ old('phone',$driver->user->phone) }}'>
                                     @error('phone')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label">{{__('drivers/edit.country')}}</label>
-                                    <input type="text" name="country" class="form-control border border-2 p-2" value='{{ old('country',$driver->country) }}'>
-                                    @error('country')
-                                        <p class='text-danger inputerror'>{{ $message }} </p>
-                                    @enderror
+                                    <label class="form-label">{{__('drivers/edit.province')}}</label>
+                                    <select class="form-select border border-2 p-2"
+                                            name="province"
+                                            data-style="select-with-transition"
+                                            data-size="100"
+                                            id="province_id"
+                                    >
+                                        <option value="">--</option>
+
+                                        @foreach($provinces as $province)
+                                            <option value="{{$province->name_ar}}" @if($driver->province == $province->name_ar) selected @endif>&nbsp;&nbsp; {{$province->name_ar}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">{{__('drivers/edit.city')}}</label>
-                                    <input type="text" name="city" class="form-control border border-2 p-2" value='{{ old('city',$driver->city) }}'>
-                                    @error('city')
-                                        <p class='text-danger inputerror'>{{ $message }} </p>
-                                    @enderror
+                                    <select class="form-select border border-2 p-2"
+                                            name="city"
+                                            data-style="select-with-transition"
+                                            data-size="100"
+                                            id="city_id"
+                                    >
+                                        <option value="">--</option>
+                                        @foreach($cities as $city)
+                                            <option value="{{$city->name_ar}}" @if($city->name_ar == $driver->city) selected @endif>&nbsp;&nbsp; {{$city->name_ar}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">{{__('drivers/edit.district')}}</label>
-                                    <input type="text" name="district" class="form-control border border-2 p-2" value='{{ old('district',$driver->district) }}'>
-                                    @error('district')
-                                        <p class='text-danger inputerror'>{{ $message }} </p>
-                                    @enderror
+                                    <select class="form-select border border-2 p-2"
+                                            name="neighborhood"
+                                            data-style="select-with-transition"
+                                            data-size="100"
+                                            id="neighborhood_id"
+                                    >
+                                        <option value="">--</option>
+                                        @foreach($neighborhoods as $neighborhood)
+                                            <option value="{{$neighborhood->name_ar}}" @if($neighborhood->name_ar == $driver->neighborhood) selected @endif>&nbsp;&nbsp; {{$neighborhood->name_ar}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="mb-3 col-md-4">

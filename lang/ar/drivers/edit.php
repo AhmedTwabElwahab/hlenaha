@@ -17,6 +17,7 @@ return [
     'id_number'                 => 'رقم الهوية',
     'building_number'           => 'رقم المبني',
     'delete_driver'             => 'حذف السائق',
+    'province'                  => 'المنطقة',
 
 
 ];

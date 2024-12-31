@@ -25,11 +25,14 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
              UserSeeder::class,
-             DriverSeeder::class,
-             BankAccountNameSeeder::class,
+             //DriverSeeder::class,
+             //BankAccountNameSeeder::class,
              carSeeder::class,
-             bankAccountSeeder::class,
-             transactionSeeder::class,
+             ProvincesTableSeeder::class,
+             CitiesTableSeeder::class,
+             NeighborhoodsTableSeeder::class,
+             //bankAccountSeeder::class,
+             //transactionSeeder::class,
          ]);
     }
 }

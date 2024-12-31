@@ -98,11 +98,11 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">{{$driver->country}}</p>
+                                                    <p class="text-xs font-weight-bold mb-0">{{$driver->province}}</p>
                                                     <p class="text-xs text-secondary mb-0">{{$driver->city}}</p>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <span class="text-secondary text-xs font-weight-bold">{{$driver->phone}}</span>
+                                                    <span class="text-secondary text-xs font-weight-bold">{{$driver->user->phone}}</span>
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
                                                     @if($driver->status)
