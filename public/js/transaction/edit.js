@@ -2,12 +2,24 @@ let driver = $('#driver_id');
 let account_select = $('#driver_bank_account_id');
 let url            =  window.location.protocol + "//" + location.host +  "/" ;
 
+let searchParams = new URLSearchParams(window.location.search);
 
 driver.on('change',function (e)
 {
     e.preventDefault();
     // let form   = new FormData(this);
-    let user_id = $(this).find(':selected').attr('data-user_id');
+    sendRequest();
+});
+
+if (searchParams.has('driver'))
+{
+    sendRequest();
+}
+
+
+function sendRequest()
+{
+    let user_id = driver.find(':selected').attr('data-user_id');
 
     axios({
         method: 'POST',
@@ -37,4 +49,5 @@ driver.on('change',function (e)
         account_select.prop( "disabled", true );
         return error;
     });
-});
+
+}

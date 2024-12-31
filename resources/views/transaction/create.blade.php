@@ -34,6 +34,7 @@
                                         <option value="">--</option>
                                         @foreach($drivers as $driver)
                                             <option value="{{$driver->id}}"
+                                                    @isset($driverR) @if($driverR == $driver->id) selected @endif @endisset
                                                     data-user_id="{{$driver->user_id}}">&nbsp;&nbsp; {{$driver->name}}</option>
                                         @endforeach
                                     </select>

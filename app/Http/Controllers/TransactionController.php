@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\web\TransactionRequest;
 use App\Models\bankAccount;
-use App\Models\bankAccountName;
 use App\Models\driver;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends BaseController
@@ -24,11 +24,12 @@ class TransactionController extends BaseController
         return view('transaction.index', compact('transactions'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $drivers = driver::all();
         $ourBankAccounts = bankAccount::where('user_id',auth()->id())->get();
-        return view('transaction.create',compact('drivers','ourBankAccounts'));
+        $driverR = $request->get('driver');
+        return view('transaction.create',compact('driverR','drivers','ourBankAccounts'));
     }
 
     public function edit(Transaction $transaction)

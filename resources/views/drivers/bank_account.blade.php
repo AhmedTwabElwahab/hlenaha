@@ -92,11 +92,10 @@
                                                     <span class="text-secondary text-xs font-weight-bold">{{$account->iban}}</span>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a href="#"
+                                                    <a href="{{route('transaction.create',['driver' => $driver->id])}}"
                                                        class="text-secondary font-weight-bold text-xs">
                                                         <i class="material-icons">send</i>
                                                     </a>
-{{--                                                    TODO::make transaction--}}
                                                 </td>
                                             </tr>
                                         @endforeach
