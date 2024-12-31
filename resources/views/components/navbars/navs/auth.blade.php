@@ -24,29 +24,11 @@
             </form>
             <ul class="navbar-nav me-auto ms-0 justify-content-end">
                 <li class="nav-item dropdown ps-2 d-flex align-items-center">
-                    <a class="nav-link text-body p-0" id="dropdownMenuButton"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="material-icons">notifications_active</i>
+                    <a class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="material-icons cursor-pointer" id="notification_ico">notifications_active</i>
                     </a>
-                    <ul class="dropdown-menu px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                        <li class="ml-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <img src="{{ asset('assets') }}/img/team-2.jpg" class="avatar avatar-sm  ms-3">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">رسالة جديدة</span> من محمد
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1"></i>
-                                            منذ 13 دقيقة
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                    <ul class="dropdown-menu px-2 py-3 me-sm-n4" id="no_ul" aria-labelledby="dropdownMenuButton">
+                        <p>{{__('global.noMessages')}}</p>
                     </ul>
                 </li>
                 <li class="nav-item px-3 d-flex align-items-center">

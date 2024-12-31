@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
     Route::get('messages',[MessageController::class,'index'])->name('messages.index');
     Route::post('messages',[MessageController::class,'store'])->name('messages.store');
     Route::get('messages/{web_user}',[MessageController::class,'show'])->name('messages.show');
+    Route::post('messages/getMessages',[MessageController::class,'getMessages'])->name('messages.getMessages');
 
 
     //Users

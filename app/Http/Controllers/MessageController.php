@@ -29,7 +29,7 @@ class MessageController extends BaseController
             ['receiver_id','=',$web_user->id]
         ])->get();
 
-
+        $this->makeMessagesRead($web_user->id);
         return view('messages.index', compact('web_user','users','messages'));
     }
 
@@ -51,6 +51,22 @@ class MessageController extends BaseController
             DB::rollBack();
             $message = $this->handleException($e);
             return redirect()->back()->withErrors([$message]);
+        }
+    }
+
+    public function getMessages()
+    {
+        $messages = Message::where('receiver_id',1)->where('read_at',null)->with(['sender'])->paginate(5);
+        $count = Message::where('receiver_id',1)->where('read_at',null)->with(['sender'])->count();
+        return ['msg' => $messages,'total'=> $count];
+    }
+
+    protected function makeMessagesRead($id)
+    {
+        $messages = Message::where('receiver_id',1)->where('sender_id',$id)->where('read_at',null)->get();
+        foreach ($messages as $message) {
+            $message->read_at = now();
+            $message->save();
         }
     }
 }

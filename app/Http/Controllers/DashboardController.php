@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Notifications\adminNotification;
 use Illuminate\Http\Request;
 

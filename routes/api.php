@@ -23,9 +23,7 @@ Route::controller(AuthController::class)->group(function ()
 
 Route::get('/email/verify/{id}/{hash}',[VerificationApiController::class,'verify'])->name('verification.verify');
 
-// الرسائل
-// الاشعارات
-// تعديل البروفايل
+
 Route::group(['middleware' => ['auth:sanctum']],function ()
 {
     //Email

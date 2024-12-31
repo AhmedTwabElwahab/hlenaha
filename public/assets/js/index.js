@@ -101,3 +101,62 @@ function setDark(el)
         darkMode(el);
     }
 }
+
+
+
+let url            =  window.location.protocol + "//" + location.host +  "/" ;
+
+(function ()
+{
+    let ul = $('#no_ul');
+    let ic = $('#notification_ico');
+    axios({
+        method: 'POST',
+        url: url + 'messages/getMessages',
+    }).then((response) =>
+    {
+        if (response.data != null)
+        {
+            let data =response.data.msg.data;
+            ul.empty();
+            $.each(data, function( index, value )
+            {
+                let date = new Date(value.created_at);
+
+                ul.append(`<li class="ml-2">
+                    <a class="dropdown-item border-radius-md" href="messages/${value.sender.id}">
+                        <div class="d-flex py-1">
+                            <div class="my-auto">
+                                <div class="avatar avatar-sm ms-3" style="background: #cccccc">
+                                     <i class="material-icons opacity-10">chat</i>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="text-sm font-weight-normal mb-1">
+                                    <span class="font-weight-bold">رسالة جديدة</span> من ${value.sender.name}
+                                </h6>
+                                <p class="text-xs text-secondary mb-0">
+                                    <i class="fa fa-clock me-1"></i>
+                                    ${ date.toLocaleTimeString()}
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </li>`);
+            });
+
+            if (Number(response.data.total) > 0)
+            {
+                // add total of messages
+                ic.after(` <span class="position-absolute top-5 start-100 translate-middle badge rounded-pill bg-danger border border-white small py-1 px-2">
+                                <span class="small">${response.data.total}</span>
+                        </span>`);
+            }
+
+        }
+
+    }, (error) =>
+    {
+        return error;
+    });
+}());

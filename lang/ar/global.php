@@ -22,6 +22,7 @@ return [
     'update_success'           => 'تم تحديث البيانات بنجاح!',
     'create_success'           => 'تم إضافة البيانات بنجاح!',
     'delete_success'           => 'تم خذف البيانات بنجاح!',
+    'noMessages'               => 'لا يوجد لديك إشعارات',
 
 
 
