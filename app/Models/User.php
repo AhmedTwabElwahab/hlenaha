@@ -94,7 +94,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin()
     {
-        return $this->role === 'ROLE_ADMIN';
+        return $this->role === ADMIN_ROLE;
     }
 
     public function driver():HasOne

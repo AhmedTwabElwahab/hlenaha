@@ -3,17 +3,16 @@
 namespace App\Http\Requests\web;
 
 
-use App\Http\Requests\Api\APIRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BankAccountRequest extends APIRequest
+class BankAccountRequest extends FormRequest
 {
     protected array $rules = [
         'bank_account_name_id'      => 'required|numeric|exists:bank_account_names,id',
         'user_id'                   => 'sometimes|nullable|numeric|exists:users,id',
         'account_number'            => 'required|numeric',
         'iban'                      => 'required|numeric',
-        'disc'                      => 'required|string',
+        'disc'                      => 'sometimes|nullable|string',
         'is_default'                => 'sometimes|nullable|numeric',
     ];
     /**

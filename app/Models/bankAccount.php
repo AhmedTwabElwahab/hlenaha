@@ -55,7 +55,7 @@ class bankAccount extends Model
         $Bank_account->account_number           = $request->input('account_number');
         $Bank_account->iban                     = $request->input('iban');
         $Bank_account->disc                     = $request->input('disc');
-        $Bank_account->is_default               = $request->input('is_default');
+        $Bank_account->is_default               = $request->input('is_default') ?? false;
 
 
         if (!$Bank_account->save())

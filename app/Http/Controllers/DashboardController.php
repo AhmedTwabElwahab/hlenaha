@@ -15,6 +15,7 @@ class DashboardController extends Controller
 
 //        $notifications = auth()->user()->unreadNotifications;
 //        dd($notifications);
+
         return view('dashboard.index');
     }
 }

@@ -77,7 +77,7 @@ class DriverController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return redirect()->back()->withErrors([$message]);
+            return redirect()->back()->withErrors(__('global.create_error'))->withInput();
         }
     }
 
@@ -112,7 +112,7 @@ class DriverController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return redirect()->back()->withErrors([$message]);
+            return redirect()->back()->withErrors(__('global.create_update'))->withInput();
         }
     }
 
@@ -141,7 +141,7 @@ class DriverController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return redirect()->back()->withErrors([$message]);
+            return redirect()->back()->withErrors(__('global.error_delete'));
         }
     }
 

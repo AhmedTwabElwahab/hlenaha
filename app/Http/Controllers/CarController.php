@@ -48,7 +48,7 @@ class CarController extends BaseController
     /**
      * Store a new Car in dataBase.
      * @param CarRequest $request
-     * @return View
+     * @return
      * @throws \Exception
      */
     public function store(CarRequest $request)
@@ -64,7 +64,7 @@ class CarController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return redirect()->back()->withErrors([$message]);
+            return redirect()->back()->withErrors(__('global.create_error'));
         }
     }
 
@@ -112,16 +112,16 @@ class CarController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return redirect()->back()->withErrors([$message]);
+            return redirect()->back()->withErrors(__('global.error_update'));
         }
     }
 
     /**
      * Remove the specified resource from storage.
      * @param Car $car
-     * @return View
+     * @return
      */
-    public function destroy(Car $car):View
+    public function destroy(Car $car)
     {
         DB::beginTransaction();
         try {
@@ -135,7 +135,7 @@ class CarController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return redirect()->back()->withErrors([$message]);
+            return redirect()->back()->withErrors(__('global.error_delete'));
         }
     }
 }

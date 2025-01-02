@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('account_number',255);
             $table->string('iban',255);
-            $table->string('disc',255);
+            $table->string('disc',255)->nullable();
             $table->boolean('is_default')->default(false);
             $table->timestamps();
             $table->softDeletes();

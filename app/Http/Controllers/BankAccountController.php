@@ -41,7 +41,7 @@ class BankAccountController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors( __('global.error_create'));
         }
     }
 
@@ -89,7 +89,7 @@ class BankAccountController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors( __('global.error_update'));
         }
     }
 
@@ -112,7 +112,8 @@ class BankAccountController extends BaseController
         {
             DB::rollBack();
             $message = $this->handleException($e);
-            return $this->failed($message);
+            return redirect()->back()->withErrors( __('global.error_delete'));
+
         }
     }
 
