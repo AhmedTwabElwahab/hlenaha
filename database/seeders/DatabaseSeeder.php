@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
              UserSeeder::class,
              //DriverSeeder::class,
              BankAccountNameSeeder::class,
-             carSeeder::class,
+             CarSeeder::class,
              ProvincesTableSeeder::class,
              CitiesTableSeeder::class,
              NeighborhoodsTableSeeder::class,
