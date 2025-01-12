@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionsController;
+use Laravel\Socialite\Facades\Socialite;
 
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -30,6 +31,16 @@ Route::get('/reset-password/{token}', function ($token) {
 
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
 
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('google')->user();
+    dd($user);
+    // $user->token
+});
 
 Route::group(['middleware' => ['auth',CheckAdmin::class]], function ()
 {

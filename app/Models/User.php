@@ -102,4 +102,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Driver::class);
     }
 
+    public function linkedSocialAccounts(): HasOne
+    {
+        return $this->hasOne(LinkedSocialAccount::class);
+    }
+
 }
